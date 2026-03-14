@@ -1,50 +1,65 @@
-# React + TypeScript + Vite
+# SIME LAB: Social Intelligence Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**SIME LAB Data Explorer** is a high-performance Social Intelligence Platform designed to parse, filter, and visualize complex social network data. It specializes in processing NodeXL exports and other social data formats to provide actionable insights into digital conversations.
 
-Currently, two official plugins are available:
+## 🚀 Key Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Advanced Data Parsing**: Native support for NodeXL CSV exports with auto-detection of platform metadata (Twitter, Facebook, LinkedIn, etc.).
+- **Dynamic Analysis Dashboard**: Interactive visualization of social nodes and edges with real-time metric updates.
+- **Precision Filtering**:
+  - **Sentiment Analysis**: Filter by Positive, Neutral, or Negative emotional tones.
+  - **Influence Metrics**: Threshold-based filtering by followers and centralities.
+  - **Categorical Views**: Cross-platform and topic-based categorization.
+  - **Temporal Analysis**: Native date-range selection and sorting.
+- **Quick View Presets**: One-click access to critical insights like "Top Influencers", "Viral Posts", and "Negative Mentions".
+- **Professional Export**: Export refined, filtered datasets back to CSV for further reporting.
 
-## Expanding the ESLint configuration
+## 🛠 Technology Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Frontend**: [React](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Data Handling**: [PapaParse](https://www.papaparse.com/) (High-performance CSV parsing)
 
-- Configure the top-level `parserOptions` property like this:
+## 🏁 Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Prerequisites
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- [Node.js](https://nodejs.org/) (v18 or higher recommended)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/Vivnjoroge/SIME-project.git
+   cd SIME-project
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Build for production**:
+   ```bash
+   npm run build
+   ```
+
+## 📈 Usage
+
+1. Launch the application.
+2. Drag and drop a NodeXL CSV export or browse to select a file.
+3. Use the **Sidebar Filters** to narrow down your social data.
+4. Utilize **Quick Views** for rapid situational analysis.
+5. Export your filtered data using the **Export Filtered CSV** button.
+
+---
+
+Developed for **SIME LAB** - Advanced Social Intelligence and Monitoring.
