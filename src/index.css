@@ -2,17 +2,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
 
 @theme {
-  --color-bg-primary: #0a0b10;
-  --color-bg-secondary: #12141d;
+  --color-bg-primary: #050a14;
+  --color-bg-secondary: #08101e;
   --color-accent-primary: #3b82f6;
-  --color-accent-secondary: #fbbf24;
+  --color-accent-secondary: #facc15;
   --color-text-primary: #f8fafc;
   --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
-  --color-surface-hover: rgba(45, 48, 65, 0.9);
+  --color-text-muted: #4b5563;
+  --color-surface-hover: rgba(59, 130, 246, 0.1);
 
   --font-interface: 'Inter', sans-serif;
   --font-heading: 'Outfit', sans-serif;
+
+  --shadow-accent-glow: 0 0 20px rgba(59, 130, 246, 0.4);
 }
 
 :root {
@@ -47,7 +49,7 @@
   }
 
   .btn-primary {
-    @apply bg-accent-primary text-white px-6 py-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 flex items-center gap-2 hover:translate-y-[-1px] hover:shadow-[0_0_20px_rgba(59, 130, 246, 0.4)] hover:brightness-110;
+    @apply bg-accent-primary text-white px-6 py-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 flex items-center gap-2 hover:translate-y-[-1px] hover:shadow-accent-glow hover:brightness-110;
   }
 
   .btn-outline {

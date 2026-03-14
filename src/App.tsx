@@ -1,17 +1,40 @@
-import React from 'react';
 import Sidebar from './components/Sidebar';
+import TopBar from './components/TopBar';
 import LandingPage from './pages/LandingPage';
+import AnalysisDashboard from './pages/AnalysisDashboard';
+import { useSocialData } from './hooks/useSocialData';
 
 function App() {
-  return (
-    <div className="flex min-h-screen bg-bg-primary text-text-primary selection:bg-accent-primary/30">
-      {/* Sidebar - Fix position */}
-      <Sidebar />
+  const {
+    filteredData,
+    isLoading,
+    filters,
+    processFile,
+    updateFilters,
+    resetFilters,
+    rawData
+  } = useSocialData();
 
-      {/* Main Content Area */}
-      <main className="flex-1 flex flex-col h-screen overflow-y-auto">
-        <LandingPage />
-      </main>
+  return (
+    <div className="flex flex-col h-screen w-full bg-[#050a14] text-text-primary overflow-hidden">
+      <TopBar />
+      <div className="flex flex-1 overflow-hidden">
+        <Sidebar
+          filters={filters}
+          onFilterChange={updateFilters}
+          onResetFilters={resetFilters}
+          isDataLoaded={!!rawData}
+          onFileProcessed={processFile}
+        />
+
+        <main className="flex-1 overflow-y-auto overflow-x-hidden relative custom-scrollbar">
+          {!rawData ? (
+            <LandingPage onFileProcessed={processFile} isLoading={isLoading} />
+          ) : (
+            <AnalysisDashboard data={filteredData!} />
+          )}
+        </main>
+      </div>
     </div>
   );
 }
