@@ -10,7 +10,8 @@ import {
     Monitor,
     Globe,
     RotateCcw,
-    Upload
+    Upload,
+    CheckCircle2
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -19,9 +20,10 @@ interface SidebarProps {
     onResetFilters: () => void;
     isDataLoaded: boolean;
     onFileProcessed: (file: File) => void;
+    datasetId: number | null;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilters, isDataLoaded, onFileProcessed }) => {
+const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilters, isDataLoaded, onFileProcessed, datasetId }) => {
     const [isDragging, setIsDragging] = React.useState(false);
     const [activeQuickView, setActiveQuickView] = React.useState<string | null>(null);
     const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -108,7 +110,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilte
         <aside className="w-[300px] h-[calc(100vh-64px)] bg-[#050a14] border-r border-white/5 flex flex-col overflow-y-auto custom-scrollbar">
             <div className="p-4 space-y-6">
                 {!isDataLoaded && (
-                    <>
+                    <div className="space-y-6">
                         {/* UPLOAD SECTION (Screenshot 1) */}
                         <div className="space-y-3">
                             <div className="flex items-center gap-2">
@@ -145,17 +147,27 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilte
                             </div>
 
                             <div className="bg-white/5 rounded-lg p-4 space-y-3 border border-white/5">
-                                <div className="flex items-start gap-2">
-                                    <div className="text-accent-primary mt-1">✓</div>
-                                    <p className="text-[10px] text-text-secondary">Auto-detects NodeXL column names</p>
+                                <div className="flex flex-col gap-1.5 px-1">
+                                    <div className="flex items-start gap-2">
+                                        <CheckCircle2 size={12} className="text-accent-secondary mt-0.5" />
+                                        <p className="text-[10px] text-text-secondary">Auto-detects NodeXL columns:</p>
+                                    </div>
+                                    <div className="flex flex-wrap gap-1 pl-5">
+                                        {['Tweet / Text', 'Screen Name', 'Followers', 'Centrality', 'PageRank'].map(col => (
+                                            <span key={col} className="px-1.5 py-0.5 bg-white/5 rounded text-[8px] text-text-muted font-bold uppercase transition-colors hover:text-white">
+                                                {col}
+                                            </span>
+                                        ))}
+                                        <span className="px-1.5 py-0.5 rounded text-[8px] text-text-muted font-bold uppercase italic text-white/40">+7 others</span>
+                                    </div>
                                 </div>
                                 <div className="flex items-start gap-2">
-                                    <div className="text-accent-primary mt-1">✓</div>
+                                    <CheckCircle2 size={12} className="text-accent-secondary mt-0.5" />
                                     <p className="text-[10px] text-text-secondary">Handles quoted commas in tweets</p>
                                 </div>
                                 <div className="flex items-start gap-2">
-                                    <div className="text-accent-primary mt-1">✓</div>
-                                    <p className="text-[10px] text-text-secondary">Works with Twitter, Facebook & multi-platform exports</p>
+                                    <CheckCircle2 size={12} className="text-accent-secondary mt-0.5" />
+                                    <p className="text-[10px] text-text-secondary">Works with all platform exports</p>
                                 </div>
                             </div>
                         </div>
@@ -185,7 +197,7 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilte
                                 </div>
                             </div>
                         </div>
-                    </>
+                    </div>
                 )}
 
                 {/* FILTERS SECTION (Unified from sidebarscreenshot.png) */}
@@ -382,8 +394,8 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilte
                                 key={view.name}
                                 onClick={() => handleQuickViewClick(view.name)}
                                 className={`w-full flex items-center gap-3 px-3 py-3 rounded-lg border transition-all group ${activeQuickView === view.name
-                                        ? 'bg-accent-secondary/10 border-accent-secondary text-accent-secondary shadow-lg shadow-accent-secondary/5'
-                                        : 'bg-accent-primary/5 border-accent-primary/20 text-accent-primary hover:bg-accent-primary/10 hover:border-accent-primary/40'
+                                    ? 'bg-accent-secondary/10 border-accent-secondary text-accent-secondary shadow-lg shadow-accent-secondary/5'
+                                    : 'bg-accent-primary/5 border-accent-primary/20 text-accent-primary hover:bg-accent-primary/10 hover:border-accent-primary/40'
                                     }`}
                             >
                                 <div className="transition-colors">
@@ -402,18 +414,30 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilte
                         <div className="h-[1px] flex-1 bg-white/5" />
                     </div>
                     <div className="space-y-2">
-                        <button className="w-full bg-accent-secondary hover:bg-yellow-500 text-bg-primary font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-xs transition-all active:scale-95 shadow-lg shadow-yellow-500/5">
+                        <button
+                            onClick={() => {
+                                if (datasetId) window.location.href = `http://localhost:8000/api/export-csv/?dataset_id=${datasetId}`;
+                            }}
+                            disabled={!datasetId}
+                            className="w-full bg-accent-secondary hover:bg-yellow-500 text-bg-primary font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-xs transition-all active:scale-95 shadow-lg shadow-yellow-500/5 disabled:opacity-50"
+                        >
                             <Download size={14} className="stroke-[3]" />
                             Export Filtered CSV
                         </button>
-                        <button className="w-full bg-accent-primary hover:bg-blue-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-xs transition-all active:scale-95 shadow-lg shadow-blue-500/5">
+                        <button
+                            onClick={() => {
+                                if (datasetId) window.location.href = `http://localhost:8000/api/export-json/?dataset_id=${datasetId}`;
+                            }}
+                            disabled={!datasetId}
+                            className="w-full bg-accent-primary hover:bg-blue-600 text-white font-bold py-3 rounded-lg flex items-center justify-center gap-2 text-xs transition-all active:scale-95 shadow-lg shadow-blue-500/5 disabled:opacity-50"
+                        >
                             <Download size={14} />
                             Export JSON
                         </button>
                     </div>
                 </div>
             </div>
-        </aside>
+        </aside >
     );
 };
 

@@ -19,6 +19,7 @@ export interface SocialEdge {
 }
 
 export interface SocialData {
+    datasetId?: number;
     nodes: SocialNode[];
     edges: SocialEdge[];
     summary: {
