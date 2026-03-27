@@ -384,11 +384,11 @@ const Sidebar: React.FC<SidebarProps> = ({ filters, onFilterChange, onResetFilte
                     </div>
                     <div className="space-y-1">
                         {[
-                            { name: 'Top Influencers', icon: <Globe size={14} /> },
-                            { name: 'Negative Mentions', icon: <AlertTriangle size={14} /> },
+                            // { name: 'Top Influencers', icon: <Globe size={14} /> },
+                            // { name: 'Negative Mentions', icon: <AlertTriangle size={14} /> },
                             { name: 'Viral Posts', icon: <Flame size={14} /> },
-                            { name: 'Complaints / Issues', icon: <Megaphone size={14} /> },
-                            { name: 'High-Reach Accounts', icon: <Monitor size={14} /> },
+                            // { name: 'Complaints / Issues', icon: <Megaphone size={14} /> },
+                            // { name: 'High-Reach Accounts', icon: <Monitor size={14} /> },
                         ].map((view) => (
                             <button
                                 key={view.name}

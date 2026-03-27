@@ -30,12 +30,12 @@ const AnalysisDashboard: React.FC<AnalysisDashboardProps> = ({ data }) => {
 
     const tabs = [
         { id: 'Overview', icon: LayoutDashboard },
-        { id: 'Data Table', icon: Database },
-        { id: 'Topic Model', icon: Puzzle },
-        { id: 'Sentiment', icon: MessageCircle },
-        { id: 'Influencers', icon: Star },
-        { id: 'Network', icon: Share2 },
-        { id: 'Report', icon: FileText },
+        // { id: 'Data Table', icon: Database },
+        // { id: 'Topic Model', icon: Puzzle },
+        // { id: 'Sentiment', icon: MessageCircle },
+        // { id: 'Influencers', icon: Star },
+        // { id: 'Network', icon: Share2 },
+        // { id: 'Report', icon: FileText },
     ];
 
     return (
@@ -170,13 +170,34 @@ const AnalysisDashboard: React.FC<AnalysisDashboardProps> = ({ data }) => {
                         <h3 className="text-sm font-bold tracking-tight">Top Hashtags</h3>
                         <span className="text-[10px] text-text-muted font-black uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">Frequency</span>
                     </div>
-                    <div className="h-40 flex items-center justify-center">
-                        <span className="text-[10px] text-text-muted font-bold uppercase tracking-[0.2em]">hashtag mapping...</span>
+                    <div className="h-40 flex items-center inline leading-relaxed justify-center">
+                        {/* <span className="text-[10px] text-text-muted font-bold uppercase tracking-[0.2em]">hashtag mapping...</span> */}
+                        
+                        <div className="">
+                            <ul className="text-[10px] text-text font-bold tracking-[0.2em]">#NikoKadi</ul>
+                            <PlatformBar label="" count={500} percent="width-[50%]" color="bg-[#f0b100]" />
+                        </div>
+                        <br />
+                        
+                        <div className="space-y-5">
+                            <ul className="text-[10px] text-text font-bold tracking-[0.2em]">#RutoMustGo</ul>
+                            <PlatformBar label="" count={300} percent="width-[30%]" color="bg-[#6366f1]" />
+                        </div>
+                        <br />
+                        <div className="space-y-5">
+                            <ul className="text-[10px] text-text font-bold tracking-[0.2em]">#ArsenalvsManCity</ul>
+                            <PlatformBar label="" count={100} percent="width-[10%]" color="bg-[#0ea5e9]" />
+                        </div>
+                        
+                        
+                        
+                            
+                        
                     </div>
                 </div>
 
                 {/* Keyword Cloud */}
-                <div className="bg-[#0f172a]/30 border border-white/5 rounded-2xl p-6">
+                {/* <div className="bg-[#0f172a]/30 border border-white/5 rounded-2xl p-6">
                     <div className="flex justify-between items-center mb-8">
                         <h3 className="text-sm font-bold tracking-tight">Keyword Cloud</h3>
                         <span className="text-[10px] text-text-muted font-black uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">Click to Filter</span>
@@ -184,7 +205,7 @@ const AnalysisDashboard: React.FC<AnalysisDashboardProps> = ({ data }) => {
                     <div className="h-40 flex items-center justify-center">
                         <span className="text-[10px] text-text-muted font-bold uppercase tracking-[0.2em]">entity extraction...</span>
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Top Posts Table */}
@@ -213,8 +234,8 @@ const AnalysisDashboard: React.FC<AnalysisDashboardProps> = ({ data }) => {
                                     <td className="py-4 px-4">
                                         <span className="text-[10px] font-black uppercase text-text-muted bg-white/5 px-2 py-1 rounded">{node.platform || 'Twitter'}</span>
                                     </td>
-                                    <td className="py-4 px-4 text-right text-xs font-bold">{(node.influence * 12).toFixed(0)}</td>
-                                    <td className="py-4 px-4 text-right text-xs font-bold">{(node.influence * 45).toFixed(0)}</td>
+                                    <td className="py-4 px-4 text-right text-xs font-bold">{(2 * 12).toFixed(0)}</td>
+                                    <td className="py-4 px-4 text-right text-xs font-bold">{(10* 45).toFixed(0)}</td>
                                     <td className="py-4 px-4 text-center">
                                         <span className={`text-[10px] font-black uppercase px-2 py-1 rounded ${node.sentiment === 'Pos' ? 'bg-green-500/20 text-green-400' :
                                             node.sentiment === 'Neg' ? 'bg-red-500/20 text-red-400' :
